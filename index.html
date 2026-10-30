@@ -34,6 +34,18 @@
       color: #0f172a;
       border-bottom: 2px solid #e2e8f0;
       padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card h2 a.external-link {
+      font-size: 0.85rem;
+      font-weight: normal;
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .card h2 a.external-link:hover {
+      text-decoration: underline;
     }
     iframe.viz-frame {
       width: 100%;
@@ -47,9 +59,12 @@
 
   <div class="container">
 
-    <!-- TÉCNICA 1 - FLOURISH PUBLIC -->
+    <!-- TÉCNICA 1 - FLOURISH -->
     <div class="card">
-      <h2>Técnica 1 - Flourish</h2>
+      <h2>
+        <span>Técnica 1 - Flourish</span>
+        <a class="external-link" href="https://public.flourish.studio/visualisation/30737629/" target="_blank" rel="noopener noreferrer">Abrir en pestaña nueva ↗</a>
+      </h2>
       <iframe 
         src="https://flo.uri.sh/visualisation/30737629/embed" 
         class="viz-frame" 
@@ -58,19 +73,26 @@
       </iframe>
     </div>
 
-    <!-- TÉCNICA 2 - RPUBS -->
+    <!-- TÉCNICA 2 - R (RPUBS) -->
     <div class="card">
-      <h2>Técnica 2 - R</h2>
+      <h2>
+        <span>Técnica 2 - R (RPubs)</span>
+        <a class="external-link" href="https://rpubs.com/bescrig/1472095" target="_blank" rel="noopener noreferrer">Abrir informe completo en RPubs ↗</a>
+      </h2>
       <iframe 
-        src="https://rpubs-api.s3-website-us-east-1.amazonaws.com/1472095_d37d2f0b7c254b73b5df5b10fb0364c1.html" 
+        src="https://rpubs.com/bescrig/1472095" 
         class="viz-frame" 
-        title="Visualización R">
+        title="Visualización R"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
       </iframe>
     </div>
 
     <!-- TÉCNICA 3 - TABLEAU PUBLIC -->
     <div class="card">
-      <h2>Técnica 3 - Tableau</h2>
+      <h2>
+        <span>Técnica 3 - Tableau</span>
+        <a class="external-link" href="https://public.tableau.com/views/ranking_contaminacion/Hoja3?:language=es-ES&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Abrir en Tableau ↗</a>
+      </h2>
       <iframe 
         src="https://public.tableau.com/views/ranking_contaminacion/Hoja3?:showVizHome=no&:embed=true&:language=es-ES&:display_count=n&:origin=viz_share_link" 
         class="viz-frame" 
