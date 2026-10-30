@@ -1,0 +1,126 @@
+---
+output: github_document
+---
+
+```{r linear_dendrogram_breast_cancer_k, echo=FALSE, message=FALSE, warning=FALSE, fig.width=11, fig.height=8, dpi=300}
+# ==============================================================================
+# 1. CARGA DE LIBRERÍAS
+# ==============================================================================
+library(dplyr)
+library(dendextend)
+
+# ==============================================================================
+# 2. CARGA Y PREPARACIÓN DE DATOS
+# ==============================================================================
+df_cancer <- read.csv("breast_cancer_prediction.csv", stringsAsFactors = FALSE)
+
+vars_cluster <- c("Age", "BMI", "Tumor_Size_cm", "Blood_Pressure", "Cholesterol")
+
+# Muestra estratificada representativa (5 pacientes por cada estadio tumoral)
+set.seed(42)
+df_sample <- df_cancer %>%
+  filter(!is.na(Cancer_Stage)) %>%
+  group_by(Cancer_Stage) %>%
+  slice_sample(n = 5) %>%
+  ungroup()
+
+# Construcción de etiquetas clínicas informativas
+df_sample$Etiqueta <- paste0(
+  df_sample$Cancer_Stage, " | ",
+  round(df_sample$Tumor_Size_cm, 1), " cm, ",
+  df_sample$Age, "a"
+)
+
+# ==============================================================================
+# 3. ESCALADO Y CLUSTERING JERÁRQUICO (Ward.D2)
+# ==============================================================================
+matriz_escalada <- scale(df_sample[, vars_cluster])
+rownames(matriz_escalada) <- df_sample$Etiqueta
+
+dist_matriz <- dist(matriz_escalada, method = "euclidean")
+hc_modelo <- hclust(dist_matriz, method = "ward.D2")
+
+# ==============================================================================
+# 4. CONFIGURACIÓN VISUAL HOMOGÉNEA
+# ==============================================================================
+k_clusters <- 3
+colores_k <- c("#09aa64", "#de2c35", "#135ae1") 
+
+dend <- as.dendrogram(hc_modelo)
+
+dend <- dend %>%
+  color_branches(k = k_clusters, col = colores_k) %>%
+  set("labels_col", "#222222") %>%
+  set("branches_lwd", 2.2) %>%
+  set("labels_cex", 0.95)
+
+alturas <- sort(hc_modelo$height, decreasing = TRUE)
+altura_corte <- mean(c(alturas[k_clusters - 1], alturas[k_clusters]))
+
+# ==============================================================================
+# 5. RENDERIZADO DEL DENDROGRAMA
+# ==============================================================================
+par(family = "sans", mar = c(4.8, 1, 5.5, 16))
+
+plot(
+  dend,
+  horiz = TRUE,
+  main = "",
+  xlab = "",
+  axes = FALSE
+)
+
+# Título principal
+title(
+  main = "Linear Dendrogram: Agrupación jerárquica de perfiles tumorales en cáncer de mama",
+  adj = 0,
+  line = 3.0,
+  cex.main = 1.25,
+  font.main = 2,
+  col.main = "#111111"
+)
+
+# Subtítulo
+mtext(
+  "Clasificación por similitud multivariante de características clínicas (método Ward.D2)",
+  side = 3,
+  line = 1.2,
+  adj = 0,
+  cex = 0.95,
+  font = 1,
+  col = "#444444"
+)
+
+# Eje X inferior
+axis(
+  side = 1,
+  col = "#cccccc",
+  col.axis = "#444444",
+  cex.axis = 0.82,
+  lwd = 1
+)
+
+# Etiqueta del eje X
+mtext(
+  "Distancia euclídea (variables estandarizadas)",
+  side = 1,
+  line = 2.8,
+  cex = 0.9,
+  col = "#222222"
+)
+
+# Umbral de corte y etiqueta
+abline(v = altura_corte, col = "#444444", lty = 2, lwd = 1.4)
+text(
+  x = altura_corte,
+  y = length(labels(dend)),
+  labels = " (k = 3)",
+  col = "#444444",
+  font = 2,
+  cex = 0.85,
+  pos = 4,
+  xpd = TRUE
+)
+```
+
+<small style="color: #555;"> **Fuente:** Kaggle. Breast Cancer Prediction Dataset. (<https://www.kaggle.com/datasets/mobeenfatimah/breast-cancer-prediction-dataset-10000-patient>) </small>
