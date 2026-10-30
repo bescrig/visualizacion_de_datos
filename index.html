@@ -37,7 +37,7 @@
     }
     iframe.viz-frame {
       width: 100%;
-      height: 850px;
+      height: 700px;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
     }
@@ -58,10 +58,23 @@
       </div>
     </div>
 
-    <!-- TÉCNICA 2: LINEAR DENDROGRAM (R) -->
+    <!-- TÉCNICA 2: R -->
     <div class="card">
-      <h2>Técnica 2 (R)</h2>
+      <h2>Técnica 2: Linear Dendrogram (R)</h2>
       <iframe src="PEC2-R.html" class="viz-frame" title="Dendrograma R"></iframe>
+    </div>
+
+    <!-- TÉCNICA 3: TABLEAU -->
+    <div class="card">
+      <h2>Técnica 3 (Tableau)</h2>
+      <script type="module" src="https://prod-ch-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+      <tableau-viz id="tableau-viz" 
+                   src="https://prod-ch-a.online.tableau.com/t/bescrig-a7d9e60695/views/ranking_contaminacion_v2026_2/Hoja3" 
+                   width="100%" 
+                   height="750px" 
+                   hide-tabs 
+                   toolbar="bottom">
+      </tableau-viz>
     </div>
 
   </div>
