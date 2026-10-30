@@ -30,21 +30,22 @@
     .card h2 {
       margin-top: 0;
       margin-bottom: 20px;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: #0f172a;
       border-bottom: 2px solid #e2e8f0;
       padding-bottom: 8px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
     }
-    .card h2 a.external-link {
-      font-size: 0.85rem;
-      font-weight: normal;
+    .card h2 a.host-link {
+      font-size: 0.9rem;
+      font-weight: 500;
       color: #2563eb;
       text-decoration: none;
     }
-    .card h2 a.external-link:hover {
+    .card h2 a.host-link:hover {
       text-decoration: underline;
     }
     iframe.viz-frame {
@@ -52,6 +53,7 @@
       height: 750px;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
+      display: block;
     }
   </style>
 </head>
@@ -63,7 +65,10 @@
     <div class="card">
       <h2>
         <span>Técnica 1 - Flourish</span>
-        <a class="external-link" href="https://public.flourish.studio/visualisation/30737629/" target="_blank" rel="noopener noreferrer">Abrir en pestaña nueva ↗</a>
+        <span>-</span>
+        <a class="host-link" href="https://public.flourish.studio/visualisation/30737629/" target="_blank" rel="noopener noreferrer">
+          (Flourish Studio ↗)
+        </a>
       </h2>
       <iframe 
         src="https://flo.uri.sh/visualisation/30737629/embed" 
@@ -73,17 +78,19 @@
       </iframe>
     </div>
 
-    <!-- TÉCNICA 2 - R (RPUBS) -->
+    <!-- TÉCNICA 2 - R (ARCHIVO LOCAL HTML + ENLACE A RPUBS) -->
     <div class="card">
       <h2>
-        <span>Técnica 2 - R (RPubs)</span>
-        <a class="external-link" href="https://rpubs.com/bescrig/1472095" target="_blank" rel="noopener noreferrer">Abrir informe completo en RPubs ↗</a>
+        <span>Técnica 2 - R</span>
+        <span>-</span>
+        <a class="host-link" href="https://rpubs.com/bescrig/1472095" target="_blank" rel="noopener noreferrer">
+          (RPubs ↗)
+        </a>
       </h2>
       <iframe 
-        src="https://rpubs.com/bescrig/1472095" 
+        src="PEC2.html" 
         class="viz-frame" 
-        title="Visualización R"
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+        title="Visualización R">
       </iframe>
     </div>
 
@@ -91,7 +98,10 @@
     <div class="card">
       <h2>
         <span>Técnica 3 - Tableau</span>
-        <a class="external-link" href="https://public.tableau.com/views/ranking_contaminacion/Hoja3?:language=es-ES&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Abrir en Tableau ↗</a>
+        <span>-</span>
+        <a class="host-link" href="https://public.tableau.com/views/ranking_contaminacion/Hoja3?:language=es-ES&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">
+          (Tableau Public ↗)
+        </a>
       </h2>
       <iframe 
         src="https://public.tableau.com/views/ranking_contaminacion/Hoja3?:showVizHome=no&:embed=true&:language=es-ES&:display_count=n&:origin=viz_share_link" 
